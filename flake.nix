@@ -2,7 +2,7 @@
   description = "A minimal NixOS configuration for the RK3588/RK3588S based SBCs";
 
   inputs = {
-    nixpkgs.url = "github:NikitosKey/nixpkgs/patch-1";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
 
     nixos-generators = {
@@ -43,14 +43,24 @@
         inherit localSystem;
         crossSystem = aarch64System;
       };
-    in
-    {
-      nixosModules = {
+    mkBoardModule = boardFile: { config, pkgs, lib, ... }: {
+      imports = [
+        boardFile
+      ];
 
-        orangepi5plus = throw "'nixosModules.orangepi5plus' has been renamed to 'nixosModules.boards.orangepi5plus'";
-        orangepi5b = throw "'nixosModules.orangepi5b' has been renamed to 'nixosModules.boards.orangepi5b'";
-        orangepi5 = throw "'nixosModules.orangepi5' has been renamed to 'nixosModules.boards.orangepi5'";
-        rock5a = throw "'nixosModules.rock5a' has been renamed to 'nixosModules.boards.rock5a'";
+      _module.args.rk3588 = {
+        inherit nixpkgs;
+        pkgsKernel = pkgs;
+      };
+    };
+  in
+  {
+    nixosModules = {
+        orangepi5  = mkBoardModule ./modules/boards/orangepi5.nix;
+        orangepi5b  = mkBoardModule ./modules/boards/orangepi5b.nix;
+        orangepi5plus  = mkBoardModule ./modules/boards/orangepi5plus.nix;
+        orangepi5ultra = mkBoardModule ./modules/boards/orangepi5ultra.nix;
+        rock5a  = mkBoardModule ./modules/boards/rock5a.nix.nix;
 
         boards = {
           # Orange Pi 5 SBC
