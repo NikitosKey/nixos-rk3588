@@ -47,7 +47,7 @@ The SBC's kernel config in this directory is based on the armbian's kernel confi
 
 Kernel and the build system, it's very similar to armbian's:
 
-- <https://github.com/armbian/build/>
+- <https://github.com/orangepi-xunlong/build/>
 - <https://github.com/orangepi-xunlong/linux-orangepi>
 
 Orange Pi 5/4+'s kernel 6.1 support:

@@ -3,13 +3,14 @@
   pkgs,
   ...
 }: let
-  username = "rk";
+  username = "nixos";
   # To generate a hashed password run `mkpasswd -m scrypt`.
   # this is the hash of the password "rk3588"
-  hashedPassword = "$y$j9T$V7M5HzQFBIdfNzVltUxFj/$THE5w.7V7rocWFm06Oh8eFkAKkUFb5u6HVZvXyjekK6";
+  hashedPassword = "$7$CU..../....V0jtKuZ0br4b8aG2QjRPX/$R1His9huRVhQgZqQF02g0Vxfe.QBTEFT9ofhn1nsAE8";
 in {
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
+    trusted-users = [ "root" "@wheel" "nixos" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -38,6 +39,11 @@ in {
     openFirewall = lib.mkDefault true;
   };
 
+  # Enable networkmanager.
+  networking.networkmanager = {
+    enable = true;
+  };
+
   # =========================================================================
   #      Users & Groups NixOS Configuration
   # =========================================================================
@@ -47,8 +53,8 @@ in {
     inherit hashedPassword;
     isNormalUser = true;
     home = "/home/${username}";
-    extraGroups = ["users" "wheel"];
+    extraGroups = ["users" "wheel" "networkmanager"];
   };
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "26.05";
 }

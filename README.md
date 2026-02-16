@@ -22,6 +22,8 @@ UEFI support:
 | --------------------- | ------------------ | ------------------ |
 | Orange Pi 5           | :heavy_check_mark: | :heavy_check_mark: |
 | Orange Pi 5 Plus      | :heavy_check_mark: | :heavy_check_mark: |
+| Orange Pi 5 Max       | :interrobang:      | :interrobang:      |
+| Orange Pi 5 Ultra     | :interrobang:      | :interrobang:      |
 | Rock 5A               | :no_entry_sign:    | :no_entry_sign:    |
 
 U-Boot support:
@@ -30,6 +32,8 @@ U-Boot support:
 | --------------------- | ------------------ | ------------------ |
 | Orange Pi 5           | :heavy_check_mark: | :heavy_check_mark: |
 | Orange Pi 5 Plus      | :heavy_check_mark: | :heavy_check_mark: |
+| Orange Pi 5 Max       | :interrobang:      | :interrobang:      |
+| Orange Pi 5 Ultra     | :heavy_check_mark: | :heavy_check_mark: |
 | Rock 5A               | :heavy_check_mark: | :no_entry_sign:    |
 
 ## TODO
@@ -48,7 +52,7 @@ U-Boot support:
 
 ## Flash & Boot NixOS
 
-Default user: `rk`, default password: `rk3588`
+Default user: `nixos`, default password: `nixos`
 
 The SD card images built using this flake do not embed a bootloader,
   and won't boot directly on a new board
@@ -118,9 +122,10 @@ The primary steps involved are:
 - [nabam/nixos-rockchip](https://github.com/nabam/nixos-rockchip)
 - [fb87/nixos-orangepi-5x](https://github.com/fb87/nixos-orangepi-5x)
 - [dvdjv/socle](https://github.com/dvdjv/socle)
-- [edk2-rk3588]
+- [edk2-rk3588](https://github.com/edk2-porting/edk2-rk3588)
 
 And I also got a lot of help in the [NixOS on ARM Matrix group](https://matrix.to/#/#nixos-on-arm:nixos.org)!
 
 [edk2-rk3588]: https://github.com/edk2-porting/edk2-rk3588
 [armbian]: https://github.com/armbian/build
+[linux-orangepi]: https://github.com/orangepi-xunlong/linux-orangepi
