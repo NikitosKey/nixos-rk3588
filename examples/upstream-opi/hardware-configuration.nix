@@ -20,6 +20,27 @@
     ];
   };
 
+  networking = {
+    hostName = "orangepi5ultra";
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    networkmanager = {
+      enable = true;
+      wifi.macAddress = "preserve";
+      settings = {
+        connectivity = {
+          uri = "http://nmcheck.gnome.org/check_network_status.txt";
+          interval = 300;
+        };
+        main = {
+          rc-manager = "resolvconf";
+        };
+      };
+      dns = "systemd-resolved";
+    };
+  };
+
+  hardware.bluetooth.enable = true;
+
   # We do not set fileSystems mounts because our root and firmware partitions
   # are mounted by SD card configuration in ./sdcard.nix. If you add more
   # partitions, set them up here.

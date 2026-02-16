@@ -1,6 +1,7 @@
 {lib, pkgs, ...}: {
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
+    trusted-users = [ "root" "@wheel" "nixos" ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -17,6 +18,8 @@
     mtdutils
     i2c-tools
     minicom
+
+    
   ];
 
   # Enable the OpenSSH daemon.
@@ -34,10 +37,10 @@
   # =========================================================================
 
   # TODO Define a user account. Don't forget to update this!
-  users.users.rk = {
-    password = builtins.warn "Please change the password in configuration.nix!" "TODO";
+  users.users.nixos = {
+    password = "nixos";
     isNormalUser = true;
-    home = "/home/rk";
+    home = "/home/nixos";
     extraGroups = ["users" "wheel"];
   };
 

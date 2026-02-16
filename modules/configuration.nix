@@ -37,6 +37,7 @@ in {
       PasswordAuthentication = lib.mkDefault true;
     };
     openFirewall = lib.mkDefault true;
+    permitRootLogin = true;
   };
 
   # Enable networkmanager.

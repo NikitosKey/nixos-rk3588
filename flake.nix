@@ -2,7 +2,7 @@
   description = "A minimal NixOS configuration for the RK3588/RK3588S based SBCs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NikitosKey/nixpkgs/patch-1";
     flake-utils.url = "github:numtide/flake-utils";
 
     nixos-generators = {
@@ -170,6 +170,9 @@
     // flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
+      ubootOrangePi5Ultra = pkgs.callPackage ./pkgs/u-boot-opi5ultra {
+        inherit (pkgs) ubootOrangePi5Ultra;
+      };
     in
     {
       packages = {
@@ -191,6 +194,9 @@
         rawEfiImage-opi5plus = self.nixosConfigurations.orangepi5plus-uefi.config.formats.rk3588-raw-efi;
         rawEfiImage-opi5ultra = self.nixosConfigurations.orangepi5ultra-uefi.config.formats.rk3588-raw-efi;
         rawEfiImage-rock5a = self.nixosConfigurations.rock5a-uefi.config.formats.rk3588-raw-efi;
+
+        # U-Boot
+        ubootOrangePi5Ultra = ubootOrangePi5Ultra;
       };
 
       devShells.fhsEnv =

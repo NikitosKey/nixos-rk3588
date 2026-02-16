@@ -2,7 +2,7 @@
   description = "NixOS configuration for RK3588";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NikitosKey/nixpkgs/patch-1";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -11,7 +11,7 @@
     {
       ## System config, use with nixos-rebuild
       nixosConfigurations = {
-        orangepi5plus = nixpkgs.lib.nixosSystem {
+        orangepi5ultra = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
             ./sdcard.nix
@@ -26,7 +26,7 @@
     } // flake-utils.lib.eachDefaultSystem (system:
     {
       packages = {
-        sdImage = self.nixosConfigurations.orangepi5plus.config.system.build.sdImage;
+        sdImage = self.nixosConfigurations.orangepi5ultra.config.system.build.sdImage;
       };
     });
 }
